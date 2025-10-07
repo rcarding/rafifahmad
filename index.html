@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page Interaktif</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0d1b2a, #1b263b 100%);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #f5f6fa;
+    }
+
+    .glass {
+      background: rgba(44, 62, 80, 0.45);
+      border-radius: 20px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      padding: 32px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-content {
+      flex: 2;
+    }
+
+    .header-image {
+  flex: 1;
+  max-width: 540px;           /* Perbesar area gambar header */
+  margin-left: 66px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.12);
+}
+.header-image img {
+  width: 100%;
+  display: block;
+  opacity: 0.85;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 44px;                  /* Jarak antar card lebih lebar */
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+        .card {
+  background: rgba(44, 62, 80, 0.43);
+  border-radius: 20px;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 36px 0 rgba(31, 38, 135, 0.23);
+  padding:  52px 36px 36px 36px;  /* Padding lebih besar */
+  width: 520px;               /* Lebar card lebih besar */
+  min-height: 560px;
+  color: #dbe6fd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 40px 0 rgba(44, 62, 80, 0.32);
+    }
+    .card.shake {
+      animation: shake 0.4s;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      15% { transform: translateX(-8px); }
+      30% { transform: translateX(8px); }
+      45% { transform: translateX(-4px);}
+      60% { transform: translateX(4px);}
+      75% { transform: translateX(0);}
+    }
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+    .card-img {
+  width: 420px;              /* Gambar lebih besar */
+  height: 310px;
+  background: rgba(255,255,255,0.10);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  object-fit: cover;
+  opacity: 0.92;
+  box-shadow: 4px 2px 6px 0 rgba(44, 62, 80, 0.17);
+}
+    .card-description {
+      flex: 1;
+      margin-bottom: 22px;
+      font-size: 1rem;
+      text-align: center;
+      color: #e0e7ef;
+    }
+    .card-btn {
+      background: linear-gradient(135deg, #274690 60%, #142850);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 2px 6px 0 rgba(44, 62, 80, 0.17);
+      transition: background 0.2s;
+      letter-spacing: 2px;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-btn .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.5s linear;
+      background: rgba(255,255,255,0.6);
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes ripple {
+      to {
+        transform: scale(3.5);
+        opacity: 0;
+      }
+    }
+    .card-btn.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .card-btn .loader {
+      border: 3px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 3px solid #426fbe;
+      width: 20px;
+      height: 20px;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg);}
+    }
+
+    @media (max-width: 900px) {
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .header-content h1 {
+  font-size: 3.5rem; /* mengganti ukuran sebelumnya */
+}
+.header-content p {
+  font-size: 1.4rem; /* mengganti ukuran sebelumnya */
+}
+.card-title {
+  font-size: 2rem;  /* mengganti ukuran sebelumnya */
+}
+.card-description {
+  font-size: 1.25rem; /* mengganti ukuran sebelumnya */
+}
+.card-btn {
+  font-size: 1.15rem; /* mengganti ukuran sebelumnya */
+}
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(44, 62, 80, 0.65);
+  backdrop-filter: blur(8px);
+  padding: 14px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f5f6fa;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #f5f6fa;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links li a:hover {
+  color: #74b9ff;
+}
+/* CSS untuk Dropdown Menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Ganti blok CSS .dropdown-content sebelumnya dengan ini */
+.dropdown-content {
+  /* Properti dasar tetap sama */
+  position: absolute;
+  background-color: rgba(44, 62, 80, 0.95); 
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+  z-index: 1001;
+  border-radius: 8px;
+  padding: 8px 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  top: 100%;
+  left: 0;
+
+  /* Properti untuk Animasi */
+  display: block; /* Kami tetap menggunakan display: block, tetapi akan disembunyikan dengan opacity */
+  opacity: 0; /* Mulai dengan transparan (tersembunyi) */
+  visibility: hidden; /* Sembunyikan dari interaksi mouse saat tersembunyi */
+  transform: translateY(-10px); /* Mulai 10px di atas posisi akhirnya */
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; /* Tentukan properti yang akan dianimasikan */
+}
+
+/* Tambahkan blok CSS ini untuk memunculkan dropdown saat hover */
+.dropdown:hover .dropdown-content {
+  opacity: 1; /* Transparansi penuh (terlihat) */
+  visibility: visible; /* Biarkan interaksi mouse */
+  transform: translateY(0); /* Pindahkan ke posisi akhir (turun 10px) */
+}
+.dropdown-content a {
+  color: #f5f6fa;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-weight: 400;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-content a:hover {
+  background-color: #142850;
+  color: #a4c4f9;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+  </style>
+</head>
+<body>
+    <body>
+        <!-- HEADER NAVBAR -->
+        <nav class="navbar">
+          <div class="nav-logo">Rafif Ahmad</div>
+          <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#" style="cursor: default;">Menghitung</a>
+                <div class="dropdown-content">
+                    <a href="luaspersegi.html">Luas Persegi</a> 
+                    <a href="volumekotak.html">Volume Kotak</a>
+                </div>
+            </li>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="jadwalsekolah.html">Jadwal</a></li>
+            <li><a href="lyrics.html">Lirik</a></li>
+            <li><a href="about me Rafif Ahmad Darmawan.html">Tentang Saya</a></li>
+        </ul>
+        </nav>
+      
+        <!-- konten lama -->
+        <div class="glass header">
+</div>
+  <div class="glass header">
+    <div class="header-content">
+      <h1>Welcome Page</h1>
+      <p>
+        Selamat datang di halaman utama! Perkenalkan nama saya Rafif Ahmad Darmawan berjurusan DKV.
+      </p>
+      <p>
+        Disini kalian akan melihat design atau project HTML yang telah saya buat selama bersekolah.
+      </p>
+      <p>
+        Silahkan scroll ke bawah untuk melihat project-project yang telah saya buat.
+      </p>
+    </div>
+    <div class="header-image">
+      <img src="6195082827029138337.jpg" alt="Header Image">
+    </div>
+  </div>
+
+  <div class="cards-container">
+    <div class="card">
+      <div class="card-title">Jadwal Sekolah</div>
+      <img class="card-img" src="63aebfa6-b141-4082-ae7c-2c37ef3a34a8.png" alt="Gambar Fitur 1">
+      <div class="card-description">
+        Di project HTML ini, saya membuat table jadwal sekolah dari hari senin, sampai jumat.
+      </div>
+      <button class="card-btn" data-url="jadwalsekolah.html">Selengkapnya</button>
+    </div>
+    <div class="card">
+      <div class="card-title">About me</div>
+      <img class="card-img" src="c2df3d1a-b1dd-4292-9fda-7e6a33f51a0e.jpeg" alt="Gambar Fitur 2">
+      <div class="card-description">
+        Di project satu ini, saya membuat halaman tentang saya (about me) dengan HTML dan style.
+      </div>
+      <button class="card-btn" data-url="about me Rafif Ahmad Darmawan.html">Selengkapnya</button>
+    </div>
+    <div class="card">  
+      <div class="card-title">Lirik & chords lagu</div>
+      <img class="card-img" src="e2bf24f4-5cda-4180-bb9f-56211a905947.jpeg" alt="Gambar Fitur 3">
+      <div class="card-description">
+        Di project satu ini, saya membuat web lirik lagu dengan chordnya.
+      </div>
+      <button class="card-btn" data-url="lyrics.html">Selengkapnya</button>
+    </div>
+    <div class="cards-container">
+      <div class="card">
+        <div class="card-title">No Content</div>
+        <img class="card-img" src="6195082827029138336.jpg" alt="Gambar Fitur 1">
+        <div class="card-description">
+          no content available
+        </div>
+        <button class="card-btn" data-url="none">Selengkapnya</button>
+      </div>
+      <div class="card">
+        <div class="card-title">No Content</div>
+        <img class="card-img" src="6195082827029138336.jpg" alt="Gambar Fitur 1">
+        <div class="card-description">
+          no content available
+        </div>
+        <button class="card-btn" data-url="none">Selengkapnya</button>
+      </div>
+      <div class="card">
+        <div class="card-title">No Content</div>
+        <img class="card-img" src="6195082827029138336.jpg" alt="Gambar Fitur 1">
+        <div class="card-description">
+          no content available
+        </div>
+        <button class="card-btn" data-url="none">Selengkapnya</button>
+      </div>
+  </div>
+  <script>
+    // Ripple effect and loading logic for each button
+    document.querySelectorAll('.card-btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Ripple
+        const circle = document.createElement('span');
+        circle.className = 'ripple';
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        circle.style.width = circle.style.height = size + 'px';
+        circle.style.left = e.clientX - rect.left - size/2 + 'px';
+        circle.style.top = e.clientY - rect.top - size/2 + 'px';
+        button.appendChild(circle);
+
+        // Loading animation
+        button.classList.add('loading');
+        const loader = document.createElement('span');
+        loader.className = 'loader';
+        button.appendChild(loader);
+
+        // Disable button to prevent multiple clicks
+        button.disabled = true;
+
+        // Shake parent card for fun feedback
+        const card = button.closest('.card');
+        card.classList.add('shake');
+
+        // Cleanup and redirect after short delay
+        setTimeout(() => {
+          card.classList.remove('shake');
+          button.classList.remove('loading');
+          button.disabled = false;
+          loader.remove();
+          circle.remove();
+          // Redirect
+          window.open(button.getAttribute('data-url'), '_blank');
+        }, 900);
+      });
+    });
+
+    // Card click also shakes, for interactivity even outside button
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (!e.target.classList.contains('card-btn')) {
+          card.classList.add('shake');
+          setTimeout(() => card.classList.remove('shake'), 400);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
